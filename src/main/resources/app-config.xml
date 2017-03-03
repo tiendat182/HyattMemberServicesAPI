@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd 
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- Scans within the base package of the application for @Component classes 
+		to configure as beans -->
+	<context:component-scan base-package="hyatt.api.*" />
+
+	<!-- Activates replacement of ${...} placeholders by registering a PropertySourcesPlaceholderConfigurer 
+		within the application context. -->
+	<context:property-placeholder location="classpath:application.properties" />
+
+	<mvc:annotation-driven />
+
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/views/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	<bean id="appProperties"
+		class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:application.properties</value>
+		</property>
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+	<bean id="propertiesDetailsBean" class="hyatt.api.config.AppInitializers">
+		<property name="languageCode" value="${base.module.Language}" />
+		<property name="cacheControl" value="${base.module.CacheControl}" />
+		<property name="rccPropertyEndpointUrl" value="${rcc.endpoint.url.Property}" />
+		<property name="rccErrataEndpointUrl" value="${rcc.endpoint.url.Errata}" />
+		<property name="rccAppKeyValuesEndpointUrl" value="${rcc.endpoint.url.AppKeyValues}" />
+		<property name="rccAuthenEndpointUrl" value="${rcc.endpoint.authen.Url}" />
+		<property name="rccUsername" value="${rcc.Username}" />
+		<property name="rccPassword" value="${rcc.Password}" />
+		<property name="cmsBaseUrl" value="${cms.base.url}" />
+		<property name="cmsBaseExternalUrl" value="${cms.base.external.url}" />
+		<property name="cmsBaseContextUrl" value="${cms.base.url.ContextPath}" />
+		<property name="cmsBaseNode" value="${cms.base.Node}" />
+		<property name="cmsBaseQuery" value="${cms.base.Query}" />
+		<property name="cmsBaseWorkspace" value="${cms.base.Workspace}" />
+		<property name="cmsBasePathIncludeFullChildren" value="${cms.base.path.IncludeFullChildren}" />
+		<property name="cmsUsername" value="${cms.Username}" />
+		<property name="cmsPassword" value="${cms.Password}" />
+		<property name="cmsBasePathResolveReferences" value="${cms.base.path.ResolveReferences}" />
+		<property name="cmsBasePathFileContext" value="${cms.base.path.file.Context}" />
+		<!-- Load configured properties for Property Object -->
+		<property name="propertyNode" value="${property.Node}" />
+		<property name="bonusWeekAvailable" value="${property.BonusWeekAvailable}" />
+		<property name="city" value="${property.City}" />
+		<property name="country" value="${property.Country}" />
+		<property name="id" value="${property.Id}" />
+		<property name="name" value="${property.Name}" />
+		<property name="paymentTypesAccepted" value="${property.PaymentTypesAccepted}" />
+		<property name="reservationType"
+			value="${property.paymenttypesaccepted.ReservationType}" />
+		<property name="numberOfNightsAllowed"
+			value="${property.paymenttypesaccepted.NumberOfNightsAllowed}" />
+		<property name="phoneNumber" value="${property.PhoneNumber}" />
+		<property name="postalCode" value="${property.PostalCode}" />
+		<property name="regionCode" value="${property.RegionCode}" />
+		<property name="regionName" value="${property.RegionName}" />
+		<property name="reservationTypePolicies" value="${property.ReservationTypePolicies}" />
+		<property name="seasonNames" value="${property.SeasonNames}" />
+		<property name="state" value="${property.State}" />
+		<property name="streetAddress" value="${property.StreetAddress}" />
+		<property name="unitTypes" value="${property.UnitTypes}" />
+		<property name="adaOptions" value="${property.unittypes.AdaOptions}" />
+		<property name="adaUnit" value="${property.unittypes.AdaUnit}" />
+		<property name="availableFloorNumbers" value="${property.unittypes.AvailableFloorNumbers}" />
+		<property name="availableUnitNumbers" value="${property.unittypes.AvailableUnitNumbers}" />
+		<property name="availableUnitAdaOption"
+			value="${property.unittypes.availableunitnumbers.AdaOption}" />
+		<property name="availableUnitAdaUnit"
+			value="${property.unittypes.availableunitnumbers.AdaUnit}" />
+		<property name="availableUnitPropertyId"
+			value="${property.unittypes.availableunitnumbers.PropertyId}" />
+		<property name="availableUnitType"
+			value="${property.unittypes.availableunitnumbers.Type}" />
+		<property name="availableUnitUnitNumber"
+			value="${property.unittypes.availableunitnumbers.UnitNumber}" />
+		<property name="checkInCheckOutOptions" value="${property.unittypes.CheckInCheckOutOptions}" />
+		<property name="fullWeekCheckInDay" value="${property.unittypes.FullWeekCheckInDay}" />
+		<property name="maxOccupancy" value="${property.unittypes.MaxOccupancy}" />
+		<property name="roomAmenities" value="${property.unittypes.RoomAmenities}" />
+		<property name="roomType" value="${property.unittypes.RoomType}" />
+		<property name="viewTypePreferenceOptions"
+			value="${property.unittypes.ViewTypePreferenceOptions}" />
+		<property name="vacationTypes" value="${property.VacationTypes}" />
+		<property name="viewType" value="${property.ViewType}" />
+		<property name="promotedpropertyImages" value="${property.promotedproperty.Images}" />
+		<property name="promotedpropertyAmenities" value="${property.promotedproperty.Amenities}" />
+		<property name="promotedpropertyAmenitiesName" value="${property.promotedproperty.amenities.Name}" />
+		<property name="promotedpropertyAmenitiesLogo" value="${property.promotedproperty.amenities.Logo}" />
+		<property name="promotedpropertyWhyVisit" value="${property.promotedproperty.WhyVisit}" />
+		<!-- Load configured properties for Errata Object -->
+		<property name="errataNode" value="${errata.Node}" />
+		<property name="errataId" value="${errata.ErrataId}" />
+		<property name="message" value="${errata.Message}" />
+		<property name="propertyId" value="${errata.PropertyId}" />
+		<property name="startDate" value="${errata.StartDate}" />
+		<property name="endDate" value="${errata.EndDate}" />
+		<!-- Load configured properties for News Object -->
+		<property name="newsNode" value="${news.Node}"/>
+		<!-- Load configured properties for Deal Object -->
+		<property name="dealNode" value="${deal.Node}"/>
+		<!-- Load configured properties for Events Object -->
+		<property name="eventNode" value="${event.Node}"/>
+		<!-- Load configured properties for Error Object -->
+		<property name="errorNode" value="${error.Node}"/>
+		<property name="errorCode" value="${error.ErrorCode}"/>
+		<property name="errorMessage" value="${error.ErrorMessage}"/>
+		<!-- Load configured properties for staticContent of CMS -->
+		<property name="staticContentjntPage" value="${staticcontent.jntPage}" />
+		<property name="staticContentjntArea" value="${staticcontent.jntArea}" />
+		<property name="staticContentjntContentList" value="${staticcontent.jntContentList}" />
+		<property name="staticContentjntImageReferenceLink" value="${staticcontent.jntImageReferenceLink}" />
+		<property name="staticContentjntBanner" value="${staticcontent.jntBanner}" />
+		<property name="staticContentjntFileList" value="${staticcontent.jntFileList}" />
+		<property name="staticContenthyattSimpleText" value="${staticcontent.hyattSimpleText}" />
+		<property name="staticContenthyattRichText" value="${staticcontent.hyattRichText}" />
+		<property name="staticContenthyattSampleImage" value="${staticcontent.hyattSampleImage}" />
+		<property name="staticContenthyattCheckBox" value="${staticcontent.hyattCheckBox}" />
+		<property name="staticContentjntText" value="${staticcontent.jntText}" />
+		<property name="staticContentHeaderNavigator" value="${staticcontent.headerNavigator}" />
+		<property name="staticContentFooterNavigator" value="${staticcontent.footerNavigator}" />
+		<property name="staticContentjntBigText" value="${staticcontent.jntbigText}" />
+		<property name="staticContenthyattSimpleImage" value="${staticcontent.hyattSimpleImage}" />
+		<property name="staticContenthyattDate" value="${staticcontent.hyattDate}" />
+		<property name="cmsBaseRender" value="${cms.base.Render}" />
+		<property name="cmsBaseSite" value="${cms.base.Site}" />
+		<property name="cmsBasePage" value="${cms.base.Page}" />
+	</bean>
+</beans>
